@@ -13,7 +13,7 @@
 * 後台系統：商品 CRUD、訂單管理、用戶管理、管理員管理
 
 ## How Start
-```npm init```
+```npm init```  
 ```npm run dev```
 
 ## Skill
