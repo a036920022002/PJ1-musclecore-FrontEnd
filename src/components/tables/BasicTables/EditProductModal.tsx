@@ -53,7 +53,7 @@ export default function EditProductModal({ productId, onClose }: EditProductModa
   }, [productId]);
 
   //表單變更處理
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     if (!product) return;
     const { name, value } = e.target;
      // 如果改動商品分類，子分類清空（因為可能不再符合）

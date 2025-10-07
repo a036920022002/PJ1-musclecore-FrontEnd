@@ -25,6 +25,16 @@ const categories = [
   },
 ]
 
+interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  image?: string;
+  category?: string;
+  quantity: number;
+}
+
+
 // 購物車 Hook
 const useCart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -158,7 +168,7 @@ const CartDrawer = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem
             <>
               {/* 商品清單 */}
               <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                {cartItems.map((item) => (
+                {cartItems.map((item: CartItem) => (
                   <div key={item.id} className="bg-gray-50 rounded-lg p-4">
                     <div className="flex space-x-3">
                       <img 
@@ -223,9 +233,12 @@ const CartDrawer = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem
     </>
   );
 };
-
+interface SuccessNotificationProps {
+  show: boolean;
+  message?: string;
+}
 // 成功通知組件
-const SuccessNotification = ({ show, message = "成功加入購物車！" }) => {
+const SuccessNotification: React.FC<SuccessNotificationProps> = ({ show, message = "成功加入購物車！" })  => {
   if (!show) return null;
 
   return (
@@ -445,16 +458,16 @@ export default function NewHeader() {
       {/* 成功通知 */}
       <SuccessNotification show={showSuccess} />
 
-      <style jsx>{`
-        @keyframes slide-in {
-          from { transform: translateX(100%); opacity: 0; }
-          to { transform: translateX(0); opacity: 1; }
-        }
-        
-        .animate-slide-in {
-          animation: slide-in 0.3s ease-out;
-        }
-      `}</style>
+      <style>{`
+  @keyframes slide-in {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  .animate-slide-in {
+    animation: slide-in 0.3s ease-out;
+  }
+`}</style>
     </>
   )
 }

@@ -25,12 +25,13 @@ interface Order{
   customerInfo:customerInfo,
   paymentMethod:string,
   status:string,
-  userId:string
+  userId:string,
+  createdAt: string
 }
 
 export default function MyOrder() {
    const [error,setError]=useState<string | null>(null);
-   const [order, setOrder] = useState<Order[] | null>([]);
+   const [order, setOrder] = useState<Order[] | []>([]);
    const navigate = useNavigate();
 
    useEffect(() => {
