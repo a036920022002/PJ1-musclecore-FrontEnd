@@ -56,7 +56,7 @@ const ProductsDetail = () => {
         setProduct(res.data);
         setLoading(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setError("商品資料讀取失敗");
         setLoading(false);
       });
@@ -97,7 +97,7 @@ const ProductsDetail = () => {
               marginBottom: "1rem",
             }}
           >
-            商品不存在
+            商品不存在{error}
           </h1>
           <button onClick={() => navigate("/")}>返回首頁</button>
         </div>

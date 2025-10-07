@@ -50,6 +50,7 @@ const UserCenterPage: React.FC = () => {
         if (response.ok) {
           const data = await response.json();
           setMember(data);
+          console.log(member)
         }
       } catch (error) {
         console.error('Failed to fetch profile:', error);

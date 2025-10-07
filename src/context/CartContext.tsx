@@ -33,6 +33,7 @@ interface CartContextType {
 
   isCartOpen: boolean; // 是否顯示購物車抽屜
   setIsCartOpen: (isOpen: boolean) => void; // 設置
+  
 }
 
 //建立購物車上下文
