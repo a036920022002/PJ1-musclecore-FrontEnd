@@ -1,5 +1,5 @@
 // src/pages/Home.tsx
-import { Link } from 'react-router';
+
 import Header from '../../components/header/newHeader'; 
 import ProductList from '../../components/products/products'; 
 import Banner from '../../components/banner';
