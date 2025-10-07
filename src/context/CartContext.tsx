@@ -25,7 +25,7 @@ interface CartItem {
 //CartContextType 定義了購物車上下文的結構和方法
 interface CartContextType {
   cartItems: CartItem[];
-  addToCart: (product: Omit<CartItem, 'quantity'>) => void;
+  addToCart: (product: Omit<CartItem, 'quantity'>, quantity?: number) => void; // ✅ quantity 可選
   updateQuantity: (id: number, quantity: number) => void;
   removeFromCart: (id: number) => void;
   calculateTotal: () => number;
@@ -33,7 +33,8 @@ interface CartContextType {
 
   isCartOpen: boolean; // 是否顯示購物車抽屜
   setIsCartOpen: (isOpen: boolean) => void; // 設置
-  
+  isCheckoutOpen: boolean;
+  setIsCheckoutOpen: (isOpen: boolean) => void;
 }
 
 //建立購物車上下文
