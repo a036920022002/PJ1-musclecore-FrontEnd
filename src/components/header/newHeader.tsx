@@ -29,7 +29,7 @@ export default function NewHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token")); // 假設有 token 就表示已登入 !!localStorage.getItem("token")
-  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [, setIsCheckoutOpen] = useState(false);
   const { calculateTotalItems } = useCart();
   
   useEffect(() => {

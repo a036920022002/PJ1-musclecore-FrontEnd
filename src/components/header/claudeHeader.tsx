@@ -34,48 +34,50 @@ interface CartItem {
   quantity: number;
 }
 
-
+interface UseCartReturn {
+  cartItems: CartItem[]
+  isDrawerOpen: boolean
+  setIsDrawerOpen: (open: boolean) => void
+  showSuccess: boolean
+  addToCart: (product: Omit<CartItem, 'quantity'>, quantity?: number) => void
+  updateQuantity: (id: number, delta: number) => void
+  removeItem: (id: number) => void
+  getTotalItems: () => number
+  getTotalPrice: () => number
+}
 // 購物車 Hook
-const useCart = () => {
-  const [cartItems, setCartItems] = useState([]);
+const useCart = (): UseCartReturn => {
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const addToCart = (product, quantity = 1) => {
+   const addToCart = (product: Omit<CartItem, 'quantity'>, quantity = 1) => {
     const existingItem = cartItems.find(item => item.id === product.id);
     
     if (existingItem) {
-      setCartItems(prev => 
-        prev.map(item => 
-          item.id === product.id 
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
+      setCartItems(prev =>
+        prev.map(item =>
+          item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item
         )
-      );
+      )
     } else {
-      const newItem = {
-        ...product,
-        quantity: quantity,
-        addedAt: new Date().toLocaleTimeString()
-      };
-      setCartItems(prev => [...prev, newItem]);
+      const newItem: CartItem = { ...product, quantity }
+      setCartItems(prev => [...prev, newItem])
     }
     
     setShowSuccess(true);
     setTimeout(() => setShowSuccess(false), 2000);
   };
 
-  const updateQuantity = (id, delta) => {
-    setCartItems(prev => 
-      prev.map(item => 
-        item.id === id 
-          ? { ...item, quantity: Math.max(1, item.quantity + delta) }
-          : item
+  const updateQuantity = (id: number, delta: number) => {
+    setCartItems(prev =>
+      prev.map(item =>
+        item.id === id ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item
       )
-    );
-  };
+    )
+  }
 
-  const removeItem = (id) => {
+  const removeItem = (id: number) => {
     setCartItems(prev => prev.filter(item => item.id !== id));
   };
 
@@ -101,26 +103,45 @@ const useCart = () => {
 };
 
 // 購物車按鈕組件
-const CartButton = ({ totalItems, onClick }) => {
-  return (
-    <button 
-      onClick={onClick}
-      className="relative bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition-all duration-200 flex items-center space-x-2 transform hover:scale-105"
-    >
-      <ShoppingCart className="w-5 h-5" />
-      <span className="hidden sm:inline">購物車</span>
-      {totalItems > 0 && (
-        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center animate-pulse">
-          {totalItems}
-        </span>
-      )}
-    </button>
-  );
-};
+interface CartButtonProps {
+  totalItems: number
+  onClick: () => void
+}
+
+const CartButton: React.FC<CartButtonProps> = ({ totalItems, onClick }) => (
+  <button
+    onClick={onClick}
+    className="relative bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition-all duration-200 flex items-center space-x-2 transform hover:scale-105"
+  >
+    <ShoppingCart className="w-5 h-5" />
+    <span className="hidden sm:inline">購物車</span>
+    {totalItems > 0 && (
+      <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center animate-pulse">
+        {totalItems}
+      </span>
+    )}
+  </button>
+)
 
 // 購物車抽屜組件
-const CartDrawer = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem, totalPrice }) => {
-  const handleBackdropClick = (e) => {
+interface CartDrawerProps {
+  isOpen: boolean
+  onClose: () => void
+  cartItems: CartItem[]
+  onUpdateQuantity: (id: number, delta: number) => void
+  onRemoveItem: (id: number) => void
+  totalPrice: number
+}
+
+const CartDrawer: React.FC<CartDrawerProps> = ({
+  isOpen,
+  onClose,
+  cartItems,
+  onUpdateQuantity,
+  onRemoveItem,
+  totalPrice,
+}) => {
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
