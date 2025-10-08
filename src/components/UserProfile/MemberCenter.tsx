@@ -21,6 +21,7 @@ const MemberProfile: React.FC = () => {
   const [member, setMember] = useState<Member | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const token = getToken();
@@ -36,7 +37,7 @@ const MemberProfile: React.FC = () => {
 
     const fetchProfile = async () => {
       try {
-        const res = await fetch("http://localhost:3000/members/user", {
+        const res = await fetch(`${API_URL}/members/user`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (res.ok) {
@@ -66,7 +67,7 @@ const MemberProfile: React.FC = () => {
     const token = getToken();
     if (!member) return; // 如果沒有產品資料，則不進行更新
     try { // 嘗試更新產品資料
-      const response = await fetch(`http://localhost:3000/members/user`, {
+      const response = await fetch(`${API_URL}/members/user`, {
         method: "PUT", // 使用PUT方法更新
         headers: { 
         "Content-Type": "application/json",

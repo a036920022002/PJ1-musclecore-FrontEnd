@@ -10,13 +10,15 @@ const ChangePassword: React.FC = () => {
   
   const handleSubmit = async ()=>{
     const token = getToken();
+    const API_URL = import.meta.env.VITE_API_URL;
+    
     if(!token) return;
     console.log("oldPassword",oldPassword);
     console.log("newPassword",newPassword);
 
     setIsSubmitting(true);
     try{
-    const res = await fetch('http://localhost:3000/members/change-password', {
+    const res = await fetch(`${API_URL}/members/change-password`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

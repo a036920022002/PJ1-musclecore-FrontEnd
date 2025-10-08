@@ -35,10 +35,11 @@ export default function OrderDetail({ orderId, onClose }: OrderDetail) {
   const [order, setOrder] = useState<Order | null>(null);
   const [statusChange, setStatusChange] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  
+  const API_URL = import.meta.env.VITE_API_URL;
+
   // 抓取訂單資料
   useEffect(() => {
-    fetch(`http://localhost:3000/orders/${orderId}`)
+    fetch(`${API_URL}/orders/${orderId}`)
       .then(res => res.json())
       .then(data => {setOrder(data);
         console.log(data)
@@ -58,7 +59,7 @@ export default function OrderDetail({ orderId, onClose }: OrderDetail) {
  const handleUpdate = async () => { 
   if (!statusChange) return;
     setIsLoading(true);
-    fetch(`http://localhost:3000/orders/${orderId}`, {
+    fetch(`${API_URL}/orders/${orderId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: statusChange }),

@@ -44,6 +44,8 @@ const ProductsDetail = () => {
   };
 
   useEffect(() => {
+    const API_URL = import.meta.env.VITE_API_URL;
+    
     if (!id) return;
 
     setLoading(true);
@@ -51,7 +53,7 @@ const ProductsDetail = () => {
 
     // 從後端 API 請求該商品資料，假設路徑為 /products/:id
     axios
-      .get(`http://localhost:3000/products/${id}`)
+      .get(`${API_URL}/products/${id}`)
       .then((res) => {
         setProduct(res.data);
         setLoading(false);

@@ -30,9 +30,10 @@ export default function BasicTableOne() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [deleteProductId, setDeleteProductId] = useState<string | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  
+  const API_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
-  fetch("http://localhost:3000/products") // 換成你後端實際的 URL
+  fetch(`${API_URL}/products`) // 換成你後端實際的 URL
     .then((res) => res.json())
     .then((data) => {
       const setStatus=data.map((item:product)=>{
@@ -53,7 +54,7 @@ export default function BasicTableOne() {
 
 const confirmDelete = (productId: string) => {
   // 呼叫刪除 API
-  fetch(`http://localhost:3000/products/${productId}`, {
+  fetch(`${API_URL}/products/${productId}`, {
     method: "DELETE",
   })
     .then(res => {

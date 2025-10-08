@@ -156,8 +156,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
     }
-
-    const response = await fetch('http://localhost:3000/orders', {
+    const API_URL = import.meta.env.VITE_API_URL;
+    const response = await fetch(`${API_URL}/orders`, {
       method: 'POST',
       headers,
       body: JSON.stringify(orderData),

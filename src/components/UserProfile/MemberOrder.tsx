@@ -33,7 +33,8 @@ export default function MyOrder() {
    const [error,setError]=useState<string | null>(null);
    const [order, setOrder] = useState<Order[] | []>([]);
    const navigate = useNavigate();
-
+   const API_URL = import.meta.env.VITE_API_URL;
+   
    useEffect(() => {
     const token=getToken();
     if(!token || isTokenExpired(token)){
@@ -45,7 +46,7 @@ export default function MyOrder() {
     }
    
 
-   fetch("http://localhost:3000/orders/my-orders", {
+   fetch(`${API_URL}/orders/my-orders`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

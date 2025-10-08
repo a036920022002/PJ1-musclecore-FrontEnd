@@ -35,6 +35,8 @@ export default function ProductList({
   const { addToCart ,setIsCartOpen} = useCart(); // 從 Context 取得 addToCart 函數
   const [alertMessage, setAlertMessage] = useState<string>(""); // 用於顯示提示訊息
   const [isAlertVisible, setAlertVisible] = useState<boolean>(false); // 用於控制提示訊息的顯示狀態
+  const API_URL = import.meta.env.VITE_API_URL;
+  
   const showAlert = (message: string) => {
     // 假設有一個 alert 函數來顯示提示訊息
     setAlertMessage(message);
@@ -46,7 +48,7 @@ export default function ProductList({
     // 使用 useEffect 來獲取產品資料
     // 使用 axios 從後端 API 獲取產品資料
     axios
-      .get("http://localhost:3000/products") //要改成實際的 API 路徑
+      .get(`${API_URL}/products`) //要改成實際的 API 路徑
       .then((res) => setProducts(res.data))
       .catch((err) => console.error(err));
   }, []);

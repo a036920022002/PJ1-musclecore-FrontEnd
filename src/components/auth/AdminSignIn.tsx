@@ -12,6 +12,7 @@ export default function SignInForm() {
   const [employeeNumber, setEmployeeNumber] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,7 +23,7 @@ export default function SignInForm() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/admin", {
+      const res = await fetch(`${API_URL}/admin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

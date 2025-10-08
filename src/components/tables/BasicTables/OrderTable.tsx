@@ -44,9 +44,10 @@ export default function BasicTableOne() {
   const toggleExpand = (orderId: string) => {
     setExpandedOrderId(expandedOrderId === orderId ? null : orderId);
   };
+  const API_URL = import.meta.env.VITE_API_URL;
   
   useEffect(() => {
-    fetch("http://localhost:3000/orders") 
+    fetch(`${API_URL}/orders`) 
       .then((res) => res.json())
       .then((data) => {
         setTableData(data); // 假設後端返回的數據格式符合 Order 接口

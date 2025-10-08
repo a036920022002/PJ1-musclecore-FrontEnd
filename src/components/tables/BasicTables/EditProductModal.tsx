@@ -42,11 +42,11 @@ const Category = [
 export default function EditProductModal({ productId, onClose }: EditProductModalProps) {
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-
+  const API_URL = import.meta.env.VITE_API_URL;
 
   // 抓取產品資料
   useEffect(() => {
-    fetch(`http://localhost:3000/products/${productId}`)
+    fetch(`${API_URL}/products/${productId}`)
       .then(res => res.json())
       .then(data => setProduct(data))
       .catch(err => console.error("取得產品資料失敗", err));
@@ -82,7 +82,7 @@ export default function EditProductModal({ productId, onClose }: EditProductModa
     setIsLoading(true); // 設定載入中狀態
 
     try { // 嘗試更新產品資料
-      const response = await fetch(`http://localhost:3000/products/${productId}`, {
+      const response = await fetch(`${API_URL}/products/${productId}`, {
         method: "PUT", // 使用PUT方法更新
         headers: { "Content-Type": "application/json" }, // 告訴後端傳送 JSON 格式的資料
         body: JSON.stringify(product), // 將產品資料轉換為 JSON 字串

@@ -12,6 +12,7 @@ export default function FormElements() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("Employee");
+  const API_URL = import.meta.env.VITE_API_URL;
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) { // 提交表單
     e.preventDefault(); // 防止表單默認提交
@@ -23,7 +24,7 @@ export default function FormElements() {
 
     console.log("新增的員工資料：", Admindata);
     try { // 提交表單
-      const res = await fetch("http://localhost:3000/admin/new", { // 假設後端 API 路徑
+      const res = await fetch(`${API_URL}/admin/new`, { // 假設後端 API 路徑
         method: "POST", // 使用 POST 方法
         headers: {
           "Content-Type": "application/json", // 設定為 JSON 格式

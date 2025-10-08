@@ -25,11 +25,12 @@ const UserCenterPage: React.FC = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [orders, setOrders] = useState<Order[]>([]);
   const [message, setMessage] = useState("");
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     // 取得會員資料
     axios
-      .get("http://localhost:3000/api/user/profile", {
+      .get(`${API_URL}/api/user/profile`, {
         headers: { Authorization: `Bearer ${token}` }, 
       })
       .then((res) => setProfile(res.data))
@@ -37,7 +38,7 @@ const UserCenterPage: React.FC = () => {
 
     // 取得訂單列表
     axios
-      .get("http://localhost:3000/api/user/orders", {
+      .get(`${API_URL}/api/user/orders`, {
         headers: { Authorization: `Bearer ${token}` }, // 使用 token 認證
       })
       .then((res) => setOrders(res.data))

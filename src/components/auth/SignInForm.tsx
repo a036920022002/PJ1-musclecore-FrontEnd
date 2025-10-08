@@ -14,7 +14,7 @@ const LoginPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const token = getToken();
@@ -39,7 +39,7 @@ const LoginPage: React.FC = () => {
     console.log("formData",formData);
 
     try {
-      const response = await fetch("http://localhost:3000/members/login", {
+      const response = await fetch(`${API_URL}/members/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),        

@@ -23,7 +23,9 @@ export default function FormElements() {
   // const [productIsActive, setProductIsActive] = useState(false);
   const [productIsNew, setProductIsNew] = useState(true);
   const [productIsSale, setProductIsSale] = useState(false);
+  const API_URL = import.meta.env.VITE_API_URL;
 
+  
  async function handleSubmit(e: React.FormEvent<HTMLFormElement> ) {
   e.preventDefault();
   const formData = new FormData();
@@ -51,7 +53,7 @@ for (const pair of formData.entries()) {
   console.log(pair[0] + ": " + pair[1]);
 }
   try {
-    const res = await fetch("http://localhost:3000/products", {
+    const res = await fetch(`${API_URL}/products`, {
       method: "POST",
       body: formData,
     });

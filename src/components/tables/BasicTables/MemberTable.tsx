@@ -29,9 +29,10 @@ export default function BasicTableOne() {
   const [tableData,setTableData]=useState<Member[]>([]);
   const [editmember, setEditMember] = useState<string | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
-
+  const API_URL = import.meta.env.VITE_API_URL;
+  
     useEffect(() => {
-    fetch("http://localhost:3000/members") // 換成你後端實際的 URL
+    fetch(`${API_URL}/members`) // 換成你後端實際的 URL
       .then((res) => res.json())
       .then((data) => {
         setTableData(data);

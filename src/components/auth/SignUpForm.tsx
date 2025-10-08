@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { ChevronLeftIcon } from "../../icons";
 
 const SignUpPage: React.FC = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -86,7 +87,7 @@ const SignUpPage: React.FC = () => {
 
     try {
       const dataToSend = { ...formData, role: "customer" };
-      const response = await fetch("http://localhost:3000/members/register", {
+      const response = await fetch(`${API_URL}/members/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataToSend),

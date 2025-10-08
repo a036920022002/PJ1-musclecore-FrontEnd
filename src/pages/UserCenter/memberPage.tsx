@@ -42,8 +42,10 @@ const UserCenterPage: React.FC = () => {
     return;
     }
     const fetchProfile = async () => {
+      const API_URL = import.meta.env.VITE_API_URL;
+      
       try {
-        const response = await fetch('http://localhost:3000/members/user', {
+        const response = await fetch(`${API_URL}/members/user`, {
           headers:{Authorization: `Bearer ${token}`},
         });
         

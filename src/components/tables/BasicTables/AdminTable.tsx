@@ -18,8 +18,10 @@ interface Admin {
 
 export default function BasicTableOne() {
   const [tableData,setTableData]=useState<Admin[]>([]);
-    useEffect(() => {
-    fetch("http://localhost:3000/admin") // 換成你後端實際的 URL
+  const API_URL = import.meta.env.VITE_API_URL;
+
+  useEffect(() => {
+    fetch(`${API_URL}/admin`) // 換成你後端實際的 URL
       .then((res) => res.json())
       .then((data) => {
         console.log(data)

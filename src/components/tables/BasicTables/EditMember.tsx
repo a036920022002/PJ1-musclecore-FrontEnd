@@ -24,10 +24,11 @@ export default function EditMember({ _id, onClose }: EditMemberProp) {
   // const [email, setEmail] = useState<Member | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [member, setMember] = useState<Member | null>(null);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   // 抓取產品資料
   useEffect(() => {
-    fetch(`http://localhost:3000/members/${_id}`)
+    fetch(`${API_URL}/members/${_id}`)
       .then(res => res.json())
       .then(data => {
         setMember(data)})
@@ -52,7 +53,7 @@ export default function EditMember({ _id, onClose }: EditMemberProp) {
     console.log(member)
 
     try { // 嘗試更新產品資料
-      const response = await fetch(`http://localhost:3000/members/${_id}`, {
+      const response = await fetch(`${API_URL}/members/${_id}`, {
         method: "PUT", // 使用PUT方法更新
         headers: { "Content-Type": "application/json" }, // 告訴後端傳送 JSON 格式的資料
         body: JSON.stringify(member), // 將產品資料轉換為 JSON 字串
