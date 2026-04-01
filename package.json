@@ -64,5 +64,9 @@
     "typescript-eslint": "^8.22.0",
     "vite": "^6.1.0",
     "vite-plugin-svgr": "^4.3.0"
-  }
+  },
+  "description": "原為上課的期末作品，後續經改良與優化",
+  "main": "eslint.config.js",
+  "author": "",
+  "license": "ISC"
 }
